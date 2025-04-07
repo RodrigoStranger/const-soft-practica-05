@@ -16,8 +16,10 @@ VALUES
 INSERT INTO Autores (nombre, fecha_nacimiento, nacionalidad)
 VALUES
 ('Gabriel García Márquez', '1927-03-06', 'Colombiana'),
+('Plinio Apuleyo Mendoza', '1932-01-01', 'Colombiana'),
 ('Mario Vargas Llosa', '1936-03-28', 'Peruana'),
 ('Jorge Luis Borges', '1899-08-24', 'Argentina'),
+('Adolfo Bioy Casares', '1914-09-15','Argentina'),
 ('Pablo Neruda', '1904-07-12', 'Chilena'),
 ('Julio Cortázar', '1914-08-26', 'Argentina'),
 ('Isabel Allende', '1942-08-02', 'Chilena'),
@@ -35,7 +37,7 @@ VALUES
 ('María Dueñas', '1960-01-01', 'Española'),
 ('Ricardo Piglia', '1941-12-24', 'Argentino'),
 ('César Vallejo', '1892-03-16', 'Peruana'),
-('José María Arguedas', '1911-01-18', 'Peruana'),
+('José María Arguedas', '1911-01-18', 'Peruana'), El Aleph Adolfo
 ('Alfredo Bryce Echenique', '1939-02-19', 'Peruana'),
 ('Ricardo Palma', '1833-02-07', 'Peruano');
 
@@ -44,14 +46,14 @@ VALUES
 -- Gabriel García Márquez
 ('Cien Años de Soledad', '1967-06-05', 'Una obra maestra de Gabriel García Márquez que narra la historia de la familia Buendía en el mítico pueblo de Macondo, explorando el realismo mágico y las complejidades del tiempo.', 1),
 ('El Amor en los Tiempos del Cólera', '1985-06-05', 'Una novela de Gabriel García Márquez que narra la historia de un amor que sobrevive a través del tiempo, la enfermedad y la guerra.', 1),
-('Crónica de una Muerte Anunciada', '1981-06-01', 'Un relato de Gabriel García Márquez sobre un asesinato premeditado en un pequeño pueblo, explorando el destino y la inevitabilidad.', 1),
+('Crónica de una Muerte Anunciada', '1981-06-01', 'Un relato de Gabriel García Márquez sobre un asesinato premeditado en un pequeño pueblo, explorando el destino y la inevitabilidad.', 1), -- Tiene doble autor que es Plinio Apuleyo Mendoza
 -- Mario Vargas Llosa
 ('La Fiesta del Chivo', '2000-01-01', 'Una obra de Mario Vargas Llosa que describe la dictadura de Trujillo en la República Dominicana a través de una trama de terror y opresión.', 1),
 ('Conversación en La Catedral', '1969-01-01', 'Una novela de Mario Vargas Llosa que relata la historia de un periodista que busca la verdad sobre la corrupción política en Perú durante la dictadura de Odría.', 1),
 ('La Casa Verde', '1966-01-01', 'Una novela compleja de Mario Vargas Llosa que explora la vida en una ciudad peruana ficticia y las tensiones políticas y sociales de la época.', 1),
 -- Jorge Luis Borges
 ('Ficciones', '1944-01-01', 'Un conjunto de relatos de Borges que exploran laberintos, realidades alternativas, y lo infinito en el marco del realismo fantástico.', 1),
-('El Aleph', '1949-06-01', 'Un libro de Jorge Luis Borges que presenta una colección de cuentos con temas de infinito, tiempo y el concepto de universos paralelos.', 1),
+('El Aleph', '1949-06-01', 'Un libro de Jorge Luis Borges que presenta una colección de cuentos con temas de infinito, tiempo y el concepto de universos paralelos.', 1), -- Tiene doble autor que es Adolfo Bioy Casares
 ('Labyrinths', '1962-01-01', 'Una colección de cuentos y ensayos de Jorge Luis Borges que explora temas de lo imposible, los laberintos, la identidad y la eternidad.', 1),
 -- Pablo Neruda
 ('Veinte Poemas de Amor y Una Canción Desesperada', '1924-01-01', 'Una colección de poemas románticos y apasionados escritos por Pablo Neruda, que exploran el amor y la pérdida.', 1),
