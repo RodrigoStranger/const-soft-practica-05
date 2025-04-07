@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS Biblioteca;
+CREATE DATABASE IF NOT EXISTS biblioteca;
 
-USE Biblioteca;
+USE biblioteca;
 
 CREATE TABLE Generos (
     id INT AUTO_INCREMENT PRIMARY KEY,
