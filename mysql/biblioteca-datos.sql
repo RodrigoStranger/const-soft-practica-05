@@ -35,7 +35,7 @@ VALUES
 ('Horacio Quiroga', '1878-12-31', 'Uruguayo'),
 ('Eduardo Galeano', '1940-09-03', 'Uruguayo'),
 ('María Dueñas', '1960-01-01', 'Española'),
-('Ricardo Piglia', '1941-12-24', 'Argentino'),
+('Ricardo Piglia', '1941-12-24', 'Argentina'),
 ('César Vallejo', '1892-03-16', 'Peruana'),
 ('José María Arguedas', '1911-01-18', 'Peruana'),
 ('Alfredo Bryce Echenique', '1939-02-19', 'Peruana'),
