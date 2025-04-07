@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS biblioteca;
 USE biblioteca;
 
 CREATE TABLE Generos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_genero INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -11,7 +11,7 @@ CREATE TABLE Generos (
 );
 
 CREATE TABLE Autores (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_autor INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     fecha_nacimiento DATE,
     nacionalidad VARCHAR(100),
@@ -20,7 +20,7 @@ CREATE TABLE Autores (
 );
 
 CREATE TABLE Libros (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_libro INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
     fecha_publicacion DATE,
     descripcion TEXT,
@@ -30,17 +30,17 @@ CREATE TABLE Libros (
 );
 
 CREATE TABLE Libros_Autores (
-    libro_id INT,
-    autor_id INT,
-    PRIMARY KEY (libro_id, autor_id),
-    FOREIGN KEY (libro_id) REFERENCES Libros(id) ON UPDATE CASCADE,
-    FOREIGN KEY (autor_id) REFERENCES Autores(id) ON UPDATE CASCADE
+    id_libro INT,
+    id_autor INT,
+    PRIMARY KEY (id_libro, id_autor),
+    FOREIGN KEY (id_libro) REFERENCES Libros(id_libro) ON UPDATE CASCADE,
+    FOREIGN KEY (id_autor) REFERENCES Autores(id_autor) ON UPDATE CASCADE
 );
 
 CREATE TABLE Libros_Generos (
-    libro_id INT,
-    genero_id INT,
-    PRIMARY KEY (libro_id, genero_id),
-    FOREIGN KEY (libro_id) REFERENCES Libros(id) ON UPDATE CASCADE,
-    FOREIGN KEY (genero_id) REFERENCES Generos(id) ON UPDATE CASCADE
+    id_libro INT,
+    id_genero INT,
+    PRIMARY KEY (id_libro, id_genero),
+    FOREIGN KEY (id_libro) REFERENCES Libros(id_libro) ON UPDATE CASCADE,
+    FOREIGN KEY (id_genero) REFERENCES Generos(id_genero) ON UPDATE CASCADE
 );
