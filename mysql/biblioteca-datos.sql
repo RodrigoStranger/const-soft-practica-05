@@ -37,7 +37,7 @@ VALUES
 ('María Dueñas', '1960-01-01', 'Española'),
 ('Ricardo Piglia', '1941-12-24', 'Argentino'),
 ('César Vallejo', '1892-03-16', 'Peruana'),
-('José María Arguedas', '1911-01-18', 'Peruana'), El Aleph Adolfo
+('José María Arguedas', '1911-01-18', 'Peruana'),
 ('Alfredo Bryce Echenique', '1939-02-19', 'Peruana'),
 ('Ricardo Palma', '1833-02-07', 'Peruano');
 
