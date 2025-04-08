@@ -152,7 +152,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE ObtenerAutores()
 BEGIN
-    SELECT nombre, fecha_nacimiento, nacionalidad
+    SELECT id_autor, nombre, fecha_nacimiento, nacionalidad
     FROM Autores
     ORDER BY nombre ASC;
 END $$
@@ -239,7 +239,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE ObtenerGeneros()
 BEGIN
-    SELECT nombre, descripcion
+    SELECT id_genero, nombre, descripcion
     FROM Generos
     ORDER BY nombre ASC;
 END $$
