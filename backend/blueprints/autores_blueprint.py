@@ -42,21 +42,33 @@ def obtener_autores():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@autores_blueprint.route('/actualizarautor/autor/<int:id_autor>', methods=['PUT'])
-def actualizar_autor(id_autor):
+@autores_blueprint.route('/actualizarautor/nombre/<int:id_autor>', methods=['PUT'])
+def actualizar_nombre_autor(id_autor):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401
     try:
         data = request.get_json()
         nombre = data['nombre']
+        
+        autores_model.actualizar_nombre_autor(id_autor, nombre)
+        return jsonify({'mensaje': 'Nombre del autor actualizado exitosamente'}), 200
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400
+        
+@autores_blueprint.route('/actualizarautor/detalles/<int:id_autor>', methods=['PUT'])
+def actualizar_detalles_autor(id_autor):
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
+    try:
+        data = request.get_json()
         fecha_nacimiento = data['fecha_nacimiento']
         nacionalidad = data['nacionalidad']
         
-        autores_model.actualizar_autor(id_autor, nombre, fecha_nacimiento, nacionalidad)
-        return jsonify({'mensaje': 'Autor actualizado exitosamente'}), 200
+        autores_model.actualizar_detalles_autor(id_autor, fecha_nacimiento, nacionalidad)
+        return jsonify({'mensaje': 'Detalles del autor actualizados exitosamente'}), 200
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
-
+        
 '''
 @autores_blueprint.route('/asignarautoralibro/autor/<int:id_autor>/libro/<int:id_libro>', methods=['POST'])
 def asignar_autor_a_libro(id_autor, id_libro):
