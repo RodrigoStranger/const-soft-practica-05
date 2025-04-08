@@ -52,11 +52,25 @@ class LibrosModel:
                 conn.close()
             raise e
 
-    def actualizar_libro(self, id_libro, nuevo_titulo, fecha_publicacion, descripcion):
+    def actualizar_titulo_libro(self, id_libro, nuevo_titulo):
         try:
             conn = self.mysql_pool.pool.get_connection()
             cursor = conn.cursor(dictionary=True)
-            cursor.callproc('ActualizarLibro', (id_libro, nuevo_titulo, fecha_publicacion, descripcion))
+            cursor.callproc('ActualizarTituloLibro', (id_libro, nuevo_titulo))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            return True
+        except Exception as e:
+            if conn:
+                conn.close()
+            raise e
+    
+    def actualizar_detalles_libro(self, id_libro, fecha_publicacion, descripcion):
+        try:
+            conn = self.mysql_pool.pool.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.callproc('ActualizarDetallesLibro', (id_libro, fecha_publicacion, descripcion))
             conn.commit()
             cursor.close()
             conn.close()
