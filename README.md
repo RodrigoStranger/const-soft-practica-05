@@ -1,6 +1,6 @@
 # Autores y Libros - Nivel 2
 
-### 📚 Curso: Construcción de Software  
+📚 Curso: Construcción de Software  
 📅 **Ciclo Académico:** 2025 - I  
 🎓 **Semestre:** VII  
 🧑‍🏫 **Profesor:** Vicente Enrique Machaca Arceda
