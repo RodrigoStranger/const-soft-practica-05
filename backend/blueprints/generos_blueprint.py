@@ -40,7 +40,6 @@ def actualizar_genero(id_genero):
         data = request.get_json()
         nombre = data['nombre']
         descripcion = data['descripcion']
-        
         generos_model.actualizar_genero(id_genero, nombre, descripcion)
         return jsonify({'mensaje': 'Género actualizado exitosamente'}), 200
     except Exception as e:

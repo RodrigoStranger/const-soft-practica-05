@@ -11,7 +11,6 @@ def crear_libro():
         titulo = data['titulo']
         fecha_publicacion = data['fecha_publicacion']
         descripcion = data['descripcion']
-        
         libros_model.crear_libro(titulo, fecha_publicacion, descripcion)
         return jsonify({'mensaje': 'Libro creado exitosamente'}), 201
     except Exception as e:
@@ -41,14 +40,14 @@ def actualizar_libro(id_libro):
         data = request.get_json()
         nuevo_titulo = data['titulo']
         fecha_publicacion = data['fecha_publicacion']
-        descripcion = data['descripcion']
-        
+        descripcion = data['descripcion']      
         libros_model.actualizar_libro(id_libro, nuevo_titulo, fecha_publicacion, descripcion)
         return jsonify({'mensaje': 'Libro actualizado exitosamente'}), 200
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
-
-@libros_blueprint.route('/desactivarlibro/<int:id_libro>/desactivar', methods=['PUT'])
+    
+'''
+@libros_blueprint.route('/desactivarlibro/libro/<int:id_libro>/desactivar', methods=['PUT'])
 def desactivar_libro(id_libro):
     try:
         libros_model.desactivar_libro(id_libro)
@@ -56,9 +55,30 @@ def desactivar_libro(id_libro):
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@libros_blueprint.route('/activarlibro/<int:id_libro>/activar', methods=['PUT'])
+@libros_blueprint.route('/activarlibro/libro/<int:id_libro>/activar', methods=['PUT'])
 def activar_libro(id_libro):
     try:
+        libros_model.activar_libro(id_libro)
+        return jsonify({'mensaje': 'Libro activado exitosamente'}), 200
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400
+'''
+
+@libros_blueprint.route('/desactivarlibro/desactivar', methods=['PUT'])
+def desactivar_libro():
+    try:
+        data = request.get_json()
+        id_libro = data['id_libro']
+        libros_model.desactivar_libro(id_libro)
+        return jsonify({'mensaje': 'Libro desactivado exitosamente'}), 200
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400
+
+@libros_blueprint.route('/activarlibro/activar', methods=['PUT'])
+def activar_libro():
+    try:
+        data = request.get_json()
+        id_libro = data['id_libro']
         libros_model.activar_libro(id_libro)
         return jsonify({'mensaje': 'Libro activado exitosamente'}), 200
     except Exception as e:
