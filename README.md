@@ -23,6 +23,7 @@ const-soft-practica-05
 │   └── biblioteca-modelo-fisico.PNG
 │   └── biblioteca-procedimientos-almacenados.sql
 │   └── biblioteca.sql
+│   └── usuariosbiblioteca-modelo-fisico.PNG
 │   └── usuariosbiblioteca.sql
 ├── app.py
 ├── README.md
