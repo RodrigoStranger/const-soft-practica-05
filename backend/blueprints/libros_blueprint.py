@@ -48,7 +48,6 @@ def actualizar_titulo_libro(id_libro):
     try:
         data = request.get_json()
         nuevo_titulo = data['titulo']
-        
         libros_model.actualizar_titulo_libro(id_libro, nuevo_titulo)
         return jsonify({'mensaje': 'Título del libro actualizado exitosamente'}), 200
     except Exception as e:
@@ -62,7 +61,6 @@ def actualizar_detalles_libro(id_libro):
         data = request.get_json()
         fecha_publicacion = data['fecha_publicacion']
         descripcion = data['descripcion']
-        
         libros_model.actualizar_detalles_libro(id_libro, fecha_publicacion, descripcion)
         return jsonify({'mensaje': 'Detalles del libro actualizados exitosamente'}), 200
     except Exception as e:
