@@ -54,7 +54,7 @@ pip install -r requirements.txt
 ---
 
 ## Bases de datos
-Base de datos de la biblioteca:
+**Base de datos de la biblioteca:**
 
 
 <p align="center">
@@ -62,7 +62,7 @@ Base de datos de la biblioteca:
 </p>
 
 
-Base de datos de los usuarios:
+**Base de datos de los usuarios:**
 
 
 <p align="center">
