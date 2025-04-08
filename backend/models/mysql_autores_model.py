@@ -51,12 +51,26 @@ class AutoresModel:
             if conn:
                 conn.close()
             raise e
+            
+    def actualizar_nombre_autor(self, id_autor, nombre):
+            try:
+                conn = self.mysql_pool.pool.get_connection()
+                cursor = conn.cursor(dictionary=True)
+                cursor.callproc('ActualizarNombreAutor', (id_autor, nombre))
+                conn.commit()
+                cursor.close()
+                conn.close()
+                return True
+            except Exception as e:
+                if conn:
+                    conn.close()
+                raise e
 
-    def actualizar_titulo_libro(self, id_libro, nuevo_titulo):
+    def actualizar_detalles_autor(self, id_autor, fecha_nacimiento, nacionalidad):
         try:
             conn = self.mysql_pool.pool.get_connection()
             cursor = conn.cursor(dictionary=True)
-            cursor.callproc('ActualizarTituloLibro', (id_libro, nuevo_titulo))
+            cursor.callproc('ActualizarDetallesAutor', (id_autor, fecha_nacimiento, nacionalidad))
             conn.commit()
             cursor.close()
             conn.close()
@@ -65,21 +79,7 @@ class AutoresModel:
             if conn:
                 conn.close()
             raise e
-    
-    def actualizar_detalles_libro(self, id_libro, fecha_publicacion, descripcion):
-        try:
-            conn = self.mysql_pool.pool.get_connection()
-            cursor = conn.cursor(dictionary=True)
-            cursor.callproc('ActualizarDetallesLibro', (id_libro, fecha_publicacion, descripcion))
-            conn.commit()
-            cursor.close()
-            conn.close()
-            return True
-        except Exception as e:
-            if conn:
-                conn.close()
-            raise e
-
+            
     def asignar_autor_a_libro(self, id_autor, id_libro):
         try:
             conn = self.mysql_pool.pool.get_connection()
