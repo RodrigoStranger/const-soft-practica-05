@@ -46,7 +46,7 @@ def actualizar_genero(id_genero):
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@generos_blueprint.route('/asignargenerolibro/<int:id_genero>/libro/<int:id_libro>', methods=['POST'])
+@generos_blueprint.route('/asignargeneralibro/<int:id_genero>/libro/<int:id_libro>', methods=['POST'])
 def asignar_genero_a_libro(id_genero, id_libro):
     try:
         generos_model.asignar_genero_a_libro(id_genero, id_libro)
