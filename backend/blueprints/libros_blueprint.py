@@ -19,7 +19,7 @@ def crear_libro():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@libros_blueprint.route('/obtenerlibro/<int:id_libro>', methods=['GET'])
+@libros_blueprint.route('/obtenerlibro/libro/<int:id_libro>', methods=['GET'])
 def obtener_libro(id_libro):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401
@@ -41,7 +41,7 @@ def obtener_libros():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@libros_blueprint.route('/actualizarlibro/<int:id_libro>', methods=['PUT'])
+@libros_blueprint.route('/actualizarlibro/libro/<int:id_libro>', methods=['PUT'])
 def actualizar_libro(id_libro):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401

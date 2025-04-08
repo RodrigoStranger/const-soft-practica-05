@@ -19,7 +19,7 @@ def crear_genero():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@generos_blueprint.route('/obtenergenero/<int:id_genero>', methods=['GET'])
+@generos_blueprint.route('/obtenergenero/genero/<int:id_genero>', methods=['GET'])
 def obtener_genero(id_genero):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401
@@ -41,7 +41,7 @@ def obtener_generos():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@generos_blueprint.route('/actualizargenero/<int:id_genero>', methods=['PUT'])
+@generos_blueprint.route('/actualizargenero/genero/<int:id_genero>', methods=['PUT'])
 def actualizar_genero(id_genero):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401

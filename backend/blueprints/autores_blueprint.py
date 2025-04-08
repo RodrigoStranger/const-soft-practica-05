@@ -20,7 +20,7 @@ def crear_autor():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@autores_blueprint.route('/obtenerautor/<int:id_autor>', methods=['GET'])
+@autores_blueprint.route('/obtenerautor/autor/<int:id_autor>', methods=['GET'])
 def obtener_autor(id_autor):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401
@@ -42,7 +42,7 @@ def obtener_autores():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@autores_blueprint.route('/actualizarautor/<int:id_autor>', methods=['PUT'])
+@autores_blueprint.route('/actualizarautor/autor/<int:id_autor>', methods=['PUT'])
 def actualizar_autor(id_autor):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401

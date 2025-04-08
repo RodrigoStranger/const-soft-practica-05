@@ -84,7 +84,7 @@ class AutoresModel:
         try:
             conn = self.mysql_pool.pool.get_connection()
             cursor = conn.cursor(dictionary=True)
-            cursor.callproc('ListarLibrosPorAutor', (id_autor,))
+            cursor.callproc('ObtenerLibrosPorAutor', (id_autor,))
             libros = []
             for result in cursor.stored_results():
                 libros = result.fetchall()
