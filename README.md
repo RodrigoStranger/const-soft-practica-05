@@ -86,3 +86,16 @@ MYSQL_USER = usuario de tu mysql
 MYSQL_PORT = puerto de tu motor mysql
 SECRET_KEY = clave secreta para la autentificación
 ```
+---
+
+## Ejecución
+
+Corren dos servidores:
+
+```bash
+python app.py
+```
+
+```bash
+python backend_server.py
+```
