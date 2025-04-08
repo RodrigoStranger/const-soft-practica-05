@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from backend.models.mysql_autores_model import AutoresModel
-from server_blueprint import verify_token
+from .server_blueprint import verify_token
 
 autores_blueprint = Blueprint('autores_blueprint', __name__)
 autores_model = AutoresModel()
