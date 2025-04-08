@@ -74,3 +74,15 @@ Base de datos de los usuarios:
 ## Variables de entorno
 
 👨‍🏫 **Video de referencia:** https://www.youtube.com/watch?v=oIbiHiNL0yc
+
+### Variables de entorno usadas
+
+```bash
+MYSQL_DATABASE = nombre de tu base de datos
+MYSQL_DATABASE_2 = nombre de tu segunda base de datos
+MYSQL_HOST = host de tu mysql
+MYSQL_PASSWORD = contraseña de tu usuario local
+MYSQL_USER = usuario de tu mysql
+MYSQL_PORT = puerto de tu motor mysql
+SECRET_KEY = clave secreta para la autentificación
+```
