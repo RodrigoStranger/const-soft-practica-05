@@ -47,3 +47,5 @@ const-soft-practica-05
 ```bash
 pip install -r requirements.txt
 ```
+
+## Bases de datos
