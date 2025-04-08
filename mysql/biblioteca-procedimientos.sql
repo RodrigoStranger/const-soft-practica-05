@@ -82,7 +82,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- DELETE
+-- PUT
 DELIMITER $$
 CREATE PROCEDURE DesactivarLibro (IN p_id_libro INT)
 BEGIN
