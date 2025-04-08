@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 SECRET_KEY = os.getenv('SECRET_KEY')
+
 dbconfig = {
     "host": os.getenv("MYSQL_HOST"),
     "port": os.getenv("MYSQL_PORT"),
@@ -37,12 +38,12 @@ def generate_token():
             token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
             cursor.close()
             conn.close()
-            return jsonify({'access_token': token})
+            return jsonify({'Token de acceso': token})
         cursor.close()
         conn.close()
-        return jsonify({'error': 'Invalid credentials'}), 401
+        return jsonify({'error': 'credenciales inválidas'}), 401
     except mysql.connector.Error as err:
-        return jsonify({'error': f"Database error: {err}"}), 500
+        return jsonify({'error': f"Error de la base de datos: {err}"}), 500
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
