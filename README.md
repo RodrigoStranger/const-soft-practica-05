@@ -1,6 +1,6 @@
 # Autores y Libros - Nivel 2
 
-Este repositorio, almacena ma mejora y el funcionamiento de un pequeño sistema usando las practicas de programacion usados en el curso de Construccion de Software 25 - I
+Este repositorio, almacena la mejora y el funcionamiento de un pequeño sistema bibliotecario usando las practicas de programacion usados en el curso de Construccion de Software 25 - I
 
 ## Estructura del proyecto
 
@@ -29,4 +29,8 @@ const-soft-practica-05
 ├── app.py
 ├── README.md
 └── requirements.txt
+```
+## Instalar dependencias
+```python
+pip install -r requirements.txt
 ```
