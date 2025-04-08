@@ -1,25 +1,24 @@
 from flask import Flask, request, jsonify
 import jwt
+import datetime
 
 app = Flask(__name__)
 SECRET_KEY = "clave_secreta"
 
-def verify_token():
-    auth_header = request.headers.get('Authorization')
+@app.route('/login/token', methods=['POST'])
+def generate_token():
+    data = request.json
 
-    if not auth_header or not auth_header.startswith("Bearer "):
-        return None
+    if not data or data.get('username') != 'admin' or data.get('password') != '1234':
+        return jsonify({'error': 'Invalid credentials'}), 401
 
-    token = auth_header.split(" ")[1]
+    payload = {
+        'user': data['username'],
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    }
+    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-        return payload
-    except jwt.ExpiredSignatureError:
-        return None
-    except jwt.InvalidTokenError:
-        return None
-
+    return jsonify({'access_token': token})
 
 if __name__ == '__main__':
-    app.run(port=5002, debug=True)
+    app.run(port=5001, debug=True)
