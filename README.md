@@ -54,4 +54,5 @@ pip install -r requirements.txt
 ---
 
 ## Bases de datos
+🗺️ Base de datos de la biblioteca
 ![Base de datos de la biblioteca](https://github.com/RodrigoStranger/const-soft-practica-05/blob/main/mysql/biblioteca-modelo-fisico.PNG?raw=true)
