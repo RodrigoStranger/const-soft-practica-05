@@ -63,6 +63,8 @@ Base de datos de la biblioteca:
 Base de datos de los usuarios:
 
 
-![Base de datos de los usuarios](https://github.com/RodrigoStranger/const-soft-practica-05/blob/main/mysql/usuariosbiblioteca-modelo-fisico.PNG?raw=true)
+<p align="center">
+  <img src="https://github.com/RodrigoStranger/const-soft-practica-05/blob/main/mysql/usuariosbiblioteca-modelo-fisico.PNG?raw=true" alt="Base de datos de los usuarios" width="700"/>
+</p>
 
 ---
