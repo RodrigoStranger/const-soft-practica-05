@@ -1,13 +1,11 @@
-from flask import Flask, request, jsonify
+import mysql.connector
+import os
 import jwt
 import datetime
-import os
-import mysql.connector
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
-
-SECRET_KEY = os.getenv("SECRET_KEY", "clave_secreta")
-
+SECRET_KEY = os.getenv('SECRET_KEY')
 dbconfig = {
     "host": os.getenv("MYSQL_HOST"),
     "port": os.getenv("MYSQL_PORT"),
@@ -16,38 +14,35 @@ dbconfig = {
     "database": os.getenv("MYSQL_DATABASE_2"),
 }
 
-def get_db_connection():
-    return mysql.connector.connect(
-        host=dbconfig["host"],
-        port=dbconfig["port"],
-        user=dbconfig["user"],
-        password=dbconfig["password"],
-        database=dbconfig["database"]
-    )
-
 @app.route('/login/token', methods=['POST'])
 def generate_token():
     data = request.json
-    username = data.get('username')
-    password = data.get('password')
-
-    if not username or not password:
-        return jsonify({'error': 'Username and password are required'}), 400
     try:
-        conn = get_db_connection()
+        conn = mysql.connector.connect(
+            host=dbconfig["host"],
+            port=int(dbconfig["port"]),
+            user=dbconfig["user"],
+            password=dbconfig["password"],
+            database=dbconfig["database"]
+        )
         cursor = conn.cursor()
-        cursor.callproc('validar_usuario', [username, password])
-        payload = {
-            'user': username,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-        return jsonify({'access_token': token})
-    except mysql.connector.Error as err:
-        return jsonify({'error': str(err)}), 401
-    finally:
+        cursor.execute("SELECT * FROM usuarios WHERE nombre = %s AND contraseña = %s", 
+                       (data.get('nombre'), data.get('contraseña')))
+        user = cursor.fetchone()
+        if user:
+            payload = {
+                'user': user[1],
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            }
+            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+            cursor.close()
+            conn.close()
+            return jsonify({'access_token': token})
         cursor.close()
         conn.close()
+        return jsonify({'error': 'Invalid credentials'}), 401
+    except mysql.connector.Error as err:
+        return jsonify({'error': f"Database error: {err}"}), 500
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
