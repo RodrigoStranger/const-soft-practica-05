@@ -1,6 +1,10 @@
 # Autores y Libros - Nivel 2
 
-Este repositorio, almacena la mejora y el funcionamiento de un pequeño sistema bibliotecario usando las practicas de programacion usados en el curso de Construccion de Software 25 - I
+📅 Ciclo Académico: 2025 - I  
+🎓 Semestre: VII  
+👨‍🏫 Profesor: Vicente Enrique Machaca Arceda
+👨‍🏫 Curso: Construcción de Software
+✍ Autores: [Rodrigo Emerson Infanzón Acosta](https://github.com/rodrigostranger), [Esthephany Erika Choquehuanca Layme](https://github.com/Esthephany24), [Carlos Daniel Aguilar Chirinos](https://github.com/CDanielAg) y [Angela Milagros Quispe Huanca](https://github.com/Mila21xy) 
 
 ## Estructura del proyecto
 
