@@ -286,3 +286,54 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
+
+-- TAREA: 
+-- LISTAR LOS LIBROS DE UN AUTOR
+-- GET
+DELIMITER $$
+CREATE PROCEDURE ObtenerLibrosPorAutor (IN p_id_autor INT)
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Autores WHERE id_autor = p_id_autor) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM Libros_Autores WHERE id_autor = p_id_autor) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no tiene libros asociados.';
+    END IF;
+    SELECT 
+        L.id_libro, 
+        L.titulo, 
+        L.fecha_publicacion, 
+        L.descripcion 
+    FROM 
+        Libros L
+    JOIN 
+        Libros_Autores LA ON L.id_libro = LA.id_libro
+    WHERE 
+        LA.id_autor = p_id_autor;
+END $$
+DELIMITER ;
+
+-- LISTAR LOS AUTORES DE UN LIBRO
+-- GET
+DELIMITER $$
+CREATE PROCEDURE ObtenerAutoresPorLibro (IN p_id_libro INT)
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM Libros_Autores WHERE id_libro = p_id_libro) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no tiene autores asociados.';
+    END IF;
+    SELECT 
+        A.id_autor, 
+        A.nombre, 
+        A.fecha_nacimiento, 
+        A.nacionalidad 
+    FROM 
+        Autores A
+    JOIN 
+        Libros_Autores LA ON A.id_autor = LA.id_autor
+    WHERE 
+        LA.id_libro = p_id_libro;
+END $$
+DELIMITER ;

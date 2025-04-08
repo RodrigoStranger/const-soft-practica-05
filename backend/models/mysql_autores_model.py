@@ -79,3 +79,19 @@ class AutoresModel:
             if conn:
                 conn.close()
             raise e
+
+    def listar_libros_por_autor(self, id_autor):
+        try:
+            conn = self.mysql_pool.pool.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.callproc('ListarLibrosPorAutor', (id_autor,))
+            libros = []
+            for result in cursor.stored_results():
+                libros = result.fetchall()
+            cursor.close()
+            conn.close()
+            return libros
+        except Exception as e:
+            if conn:
+                conn.close()
+            raise e

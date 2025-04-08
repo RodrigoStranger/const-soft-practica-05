@@ -100,3 +100,15 @@ def activar_libro():
         return jsonify({'mensaje': 'Libro activado exitosamente'}), 200
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
+
+@libros_blueprint.route('/obtenerautoresporlibro/libro/<int:id_libro>', methods=['GET'])
+def obtener_autores_por_libro(id_libro):
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
+    try:
+        autores = libros_model.listar_autores_por_libro(id_libro)
+        if not autores:
+            return jsonify({'mensaje': 'No se encontraron autores para este libro.'}), 404
+        return jsonify(autores), 200
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400

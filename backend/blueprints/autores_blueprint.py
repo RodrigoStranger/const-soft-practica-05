@@ -80,3 +80,15 @@ def asignar_autor_a_libro():
         return jsonify({'mensaje': 'Autor asignado al libro exitosamente'}), 201
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
+    
+@autores_blueprint.route('/obtenerlibrosporautor/autor/<int:id_autor>', methods=['GET'])
+def obtener_libros_por_autor(id_autor):
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
+    try:
+        libros = autores_model.listar_libros_por_autor(id_autor)
+        if not libros:
+            return jsonify({'mensaje': 'No se encontraron libros para este autor.'}), 404
+        return jsonify(libros), 200
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400
