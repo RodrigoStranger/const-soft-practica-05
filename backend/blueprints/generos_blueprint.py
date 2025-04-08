@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from backend.models.mysql_generos_model import GenerosModel
-from backend.blueprints.server_blueprint import verify_token
+from server_blueprint import verify_token
 
 generos_blueprint = Blueprint('generos_blueprint', __name__)
 generos_model = GenerosModel()

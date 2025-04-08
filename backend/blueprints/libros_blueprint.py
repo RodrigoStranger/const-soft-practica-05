@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from backend.models.mysql_libros_model import LibrosModel
-from backend.blueprints.server_blueprint import verify_token
+from server_blueprint import verify_token
 
 libros_blueprint = Blueprint('libros_blueprint', __name__)
 libros_model = LibrosModel()
