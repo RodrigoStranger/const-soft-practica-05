@@ -49,7 +49,6 @@ def actualizar_nombre_autor(id_autor):
     try:
         data = request.get_json()
         nombre = data['nombre']
-        
         autores_model.actualizar_nombre_autor(id_autor, nombre)
         return jsonify({'mensaje': 'Nombre del autor actualizado exitosamente'}), 200
     except Exception as e:
@@ -63,7 +62,6 @@ def actualizar_detalles_autor(id_autor):
         data = request.get_json()
         fecha_nacimiento = data['fecha_nacimiento']
         nacionalidad = data['nacionalidad']
-        
         autores_model.actualizar_detalles_autor(id_autor, fecha_nacimiento, nacionalidad)
         return jsonify({'mensaje': 'Detalles del autor actualizados exitosamente'}), 200
     except Exception as e:
