@@ -70,3 +70,7 @@ Base de datos de los usuarios:
 </p>
 
 ---
+
+## Variables de entorno
+
+👨‍🏫 **Video de referencia:** https://www.youtube.com/watch?v=oIbiHiNL0yc
