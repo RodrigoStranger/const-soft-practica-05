@@ -1,5 +1,3 @@
-jwt
-load_dotenv
 flask
 psycopg2-binary
 mysql-connector-python
