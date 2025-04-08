@@ -5,6 +5,17 @@ import datetime
 app = Flask(__name__)
 SECRET_KEY = "clave_secreta"
 
+def verify_token():
+    token = request.headers.get('Authorization')
+    if not token:
+        return False
+    try:
+        token = token.split(' ')[1]  # Eliminar el prefijo 'Bearer '
+        jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        return True
+    except:
+        return False
+
 # Endpoint para obtener token OAuth
 @app.route('/login/token', methods=['POST'])
 def generate_token():
@@ -17,6 +28,3 @@ def generate_token():
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
     return jsonify({'access_token': token})
-
-if __name__ == '__main__':
-    app.run(port=5001, debug=True)
