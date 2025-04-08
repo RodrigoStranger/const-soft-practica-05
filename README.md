@@ -64,7 +64,7 @@ Base de datos de los usuarios:
 
 
 <p align="center">
-  <img src="https://github.com/RodrigoStranger/const-soft-practica-05/blob/main/mysql/usuariosbiblioteca-modelo-fisico.PNG?raw=true" alt="Base de datos de los usuarios" width="700"/>
+  <img src="https://github.com/RodrigoStranger/const-soft-practica-05/blob/main/mysql/usuariosbiblioteca-modelo-fisico.PNG?raw=true" alt="Base de datos de los usuarios" width="550"/>
 </p>
 
 ---
