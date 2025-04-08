@@ -58,7 +58,7 @@ Base de datos de la biblioteca:
 
 
 <p align="center">
-  <img src="https://github.com/RodrigoStranger/const-soft-practica-05/blob/main/mysql/biblioteca-modelo-fisico.PNG?raw=true" alt="Base de datos de la biblioteca" width="470"/>
+  <img src="https://github.com/RodrigoStranger/const-soft-practica-05/blob/main/mysql/biblioteca-modelo-fisico.PNG?raw=true" alt="Base de datos de la biblioteca" width="550"/>
 </p>
 
 
