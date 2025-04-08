@@ -52,11 +52,25 @@ class GenerosModel:
                 conn.close()
             raise e
 
-    def actualizar_genero(self, id_genero, nombre, descripcion):
+    def actualizar_nombre_genero(self, id_genero, nombre):
         try:
             conn = self.mysql_pool.pool.get_connection()
             cursor = conn.cursor(dictionary=True)
-            cursor.callproc('ActualizarGenero', (id_genero, nombre, descripcion))
+            cursor.callproc('ActualizarNombreGenero', (id_genero, nombre))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            return True
+        except Exception as e:
+            if conn:
+                conn.close()
+            raise e
+
+    def actualizar_detalles_genero(self, id_genero, descripcion):
+        try:
+            conn = self.mysql_pool.pool.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.callproc('ActualizarDetallesGenero', (id_genero, descripcion))
             conn.commit()
             cursor.close()
             conn.close()
