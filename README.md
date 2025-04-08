@@ -1,12 +1,17 @@
 # Autores y Libros - Nivel 2
 
-📅 Ciclo Académico: 2025 - I  
-🎓 Semestre: VII  
-👨‍🏫 Profesor: Vicente Enrique Machaca Arceda
+### 📚 Curso: Construcción de Software  
+📅 **Ciclo Académico:** 2025 - I  
+🎓 **Semestre:** VII  
+🧑‍🏫 **Profesor:** Vicente Enrique Machaca Arceda
 
-👨‍🏫 Curso: Construcción de Software
+---
 
-✍ Autores: [Rodrigo Emerson Infanzón Acosta](https://github.com/rodrigostranger), [Esthephany Erika Choquehuanca Layme](https://github.com/Esthephany24), [Carlos Daniel Aguilar Chirinos](https://github.com/CDanielAg) y [Angela Milagros Quispe Huanca](https://github.com/Mila21xy) 
+### ✍️ Autores  
+- 👨‍💻 [Rodrigo Emerson Infanzón Acosta](https://github.com/rodrigostranger)  
+- 👩‍💻 [Esthephany Erika Choquehuanca Layme](https://github.com/Esthephany24)  
+- 👨‍💻 [Carlos Daniel Aguilar Chirinos](https://github.com/CDanielAg)  
+- 👩‍💻 [Angela Milagros Quispe Huanca](https://github.com/Mila21xy)
 
 ## Estructura del proyecto
 
