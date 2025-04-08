@@ -41,17 +41,30 @@ def obtener_libros():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@libros_blueprint.route('/actualizarlibro/libro/<int:id_libro>', methods=['PUT'])
-def actualizar_libro(id_libro):
+@libros_blueprint.route('/actualizarlibro/titulo/<int:id_libro>', methods=['PUT'])
+def actualizar_titulo_libro(id_libro):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401
     try:
         data = request.get_json()
         nuevo_titulo = data['titulo']
+        
+        libros_model.actualizar_titulo_libro(id_libro, nuevo_titulo)
+        return jsonify({'mensaje': 'Título del libro actualizado exitosamente'}), 200
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400
+
+@libros_blueprint.route('/actualizarlibro/detalles/<int:id_libro>', methods=['PUT'])
+def actualizar_detalles_libro(id_libro):
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
+    try:
+        data = request.get_json()
         fecha_publicacion = data['fecha_publicacion']
-        descripcion = data['descripcion']      
-        libros_model.actualizar_libro(id_libro, nuevo_titulo, fecha_publicacion, descripcion)
-        return jsonify({'mensaje': 'Libro actualizado exitosamente'}), 200
+        descripcion = data['descripcion']
+        
+        libros_model.actualizar_detalles_libro(id_libro, fecha_publicacion, descripcion)
+        return jsonify({'mensaje': 'Detalles del libro actualizados exitosamente'}), 200
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
     
