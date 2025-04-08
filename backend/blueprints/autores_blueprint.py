@@ -48,9 +48,21 @@ def actualizar_autor(id_autor):
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@autores_blueprint.route('/asignarautoralibro/<int:id_autor>/libro/<int:id_libro>', methods=['POST'])
+'''
+@autores_blueprint.route('/asignarautoralibro/autor/<int:id_autor>/libro/<int:id_libro>', methods=['POST'])
 def asignar_autor_a_libro(id_autor, id_libro):
     try:
+        autores_model.asignar_autor_a_libro(id_autor, id_libro)
+        return jsonify({'mensaje': 'Autor asignado al libro exitosamente'}), 201
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400
+'''
+@autores_blueprint.route('/asignarautoralibro', methods=['POST'])
+def asignar_autor_a_libro():
+    try:
+        data = request.get_json()
+        id_autor = data['id_autor']
+        id_libro = data['id_libro']
         autores_model.asignar_autor_a_libro(id_autor, id_libro)
         return jsonify({'mensaje': 'Autor asignado al libro exitosamente'}), 201
     except Exception as e:
