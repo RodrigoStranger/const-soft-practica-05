@@ -78,14 +78,17 @@ pip install -r requirements.txt
 ### Variables de entorno usadas
 
 ```bash
-MYSQL_DATABASE = nombre de tu base de datos
-MYSQL_DATABASE_2 = nombre de tu segunda base de datos
-MYSQL_HOST = host de tu mysql
-MYSQL_PASSWORD = contraseña de tu usuario
-MYSQL_USER = usuario de tu mysql
-MYSQL_PORT = puerto de tu motor mysql
-SECRET_KEY = clave secreta para la autentificación
+MYSQL_DATABASE: Es el nombre de la base de datos principal que vas a utilizar en tu aplicación.
+MYSQL_DATABASE_2: Es el nombre de una segunda base de datos, en caso de que necesites acceder a otra base de datos adicional.
+MYSQL_HOST: Es la dirección del servidor donde está alojada tu base de datos MySQL, que puede ser una IP o un nombre de dominio.
+MYSQL_PASSWORD: Es la contraseña correspondiente al usuario de la base de datos MySQL que se usará para autenticarte.
+MYSQL_USER: Es el nombre de usuario que utilizarás para conectarte a la base de datos MySQL.
+MYSQL_PORT: Es el puerto en el que el servidor MySQL está escuchando; el puerto por defecto es generalmente el 3306.
+SECRET_KEY: Es una clave secreta utilizada para la autenticación y la seguridad de tu aplicación, importante para proteger datos sensibles.
 ```
+
+
+
 ---
 
 ## Ejecución
