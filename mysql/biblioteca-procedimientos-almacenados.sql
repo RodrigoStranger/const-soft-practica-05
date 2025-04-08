@@ -62,11 +62,26 @@ BEGIN
 END $$
 DELIMITER ;
 
--- PUT
+-- PUT 
 DELIMITER $$
-CREATE PROCEDURE ActualizarLibro (
+CREATE PROCEDURE ActualizarTituloLibro (
     IN p_id_libro INT,
-    IN p_nuevo_titulo VARCHAR(255),
+    IN p_nuevo_titulo VARCHAR(255)
+)
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
+    END IF;
+    UPDATE Libros
+    SET titulo = p_nuevo_titulo
+    WHERE id_libro = p_id_libro;
+END $$ 
+DELIMITER ;
+
+-- PUT 
+DELIMITER $$ 
+CREATE PROCEDURE ActualizarDetallesLibro (
+    IN p_id_libro INT,
     IN p_fecha_publicacion DATE,
     IN p_descripcion TEXT
 )
@@ -75,11 +90,10 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
     END IF;
     UPDATE Libros
-    SET titulo = p_nuevo_titulo,
-        fecha_publicacion = p_fecha_publicacion,
+    SET fecha_publicacion = p_fecha_publicacion,
         descripcion = p_descripcion
     WHERE id_libro = p_id_libro;
-END $$
+END $$ 
 DELIMITER ;
 
 -- PUT
@@ -160,9 +174,24 @@ DELIMITER ;
 
 -- PUT
 DELIMITER $$
-CREATE PROCEDURE ActualizarAutor (
+CREATE PROCEDURE ActualizarNombreAutor (
     IN p_id_autor INT,
-    IN p_nombre VARCHAR(255),
+    IN p_nombre VARCHAR(255)
+)
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Autores WHERE id_autor = p_id_autor) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
+    END IF;
+    UPDATE Autores
+    SET nombre = p_nombre
+    WHERE id_autor = p_id_autor;
+END $$ 
+DELIMITER ;
+
+-- PUT
+DELIMITER $$
+CREATE PROCEDURE ActualizarDetallesAutor (
+    IN p_id_autor INT,
     IN p_fecha_nacimiento DATE,
     IN p_nacionalidad VARCHAR(100)
 )
@@ -171,11 +200,10 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
     END IF;
     UPDATE Autores
-    SET nombre = p_nombre,
-        fecha_nacimiento = p_fecha_nacimiento,
+    SET fecha_nacimiento = p_fecha_nacimiento,
         nacionalidad = p_nacionalidad
     WHERE id_autor = p_id_autor;
-END $$
+END $$ 
 DELIMITER ;
 
 -- POST
@@ -247,9 +275,25 @@ DELIMITER ;
 
 -- PUT
 DELIMITER $$
-CREATE PROCEDURE ActualizarGenero (
+CREATE PROCEDURE ActualizarNombreGenero (
     IN p_id_genero INT,
-    IN p_nombre VARCHAR(255),
+    IN p_nombre VARCHAR(255)
+)
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Generos WHERE id_genero = p_id_genero) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género no existe en la base de datos.';
+    END IF;
+
+    UPDATE Generos
+    SET nombre = p_nombre
+    WHERE id_genero = p_id_genero;
+END $$ 
+DELIMITER ;
+
+-- PUT
+DELIMITER $$
+CREATE PROCEDURE ActualizarDetallesGenero (
+    IN p_id_genero INT,
     IN p_descripcion TEXT
 )
 BEGIN
@@ -258,10 +302,9 @@ BEGIN
     END IF;
 
     UPDATE Generos
-    SET nombre = p_nombre,
-        descripcion = p_descripcion
+    SET descripcion = p_descripcion
     WHERE id_genero = p_id_genero;
-END $$
+END $$ 
 DELIMITER ;
 
 -- POST
