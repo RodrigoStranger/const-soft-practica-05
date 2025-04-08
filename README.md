@@ -25,6 +25,7 @@ const-soft-practica-05
 │   └── biblioteca.sql
 │   └── usuariosbiblioteca-modelo-fisico.PNG
 │   └── usuariosbiblioteca.sql
+├── .gitignore
 ├── app.py
 ├── README.md
 └── requirements.txt
