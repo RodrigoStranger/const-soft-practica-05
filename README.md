@@ -4,6 +4,7 @@ Este repositorio, almacena ma mejora y el funcionamiento de un pequeño sistema 
 
 ## Estructura del proyecto
 
+```bash
 const-soft-practica-05
 ├── backend
 │   ├── blueprints
@@ -26,3 +27,4 @@ const-soft-practica-05
 ├── app.py
 ├── README.md
 └── requirements.txt
+```
