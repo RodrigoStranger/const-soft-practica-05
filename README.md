@@ -13,6 +13,8 @@
 - 👨‍💻 [Carlos Daniel Aguilar Chirinos](https://github.com/CDanielAg)  
 - 👩‍💻 [Angela Milagros Quispe Huanca](https://github.com/Mila21xy)
 
+---
+
 ## Estructura del proyecto
 
 ```bash
@@ -42,10 +44,13 @@ const-soft-practica-05
 └── requirements.txt
 ```
 
+---
 
 ## Instalar dependencias
 ```bash
 pip install -r requirements.txt
 ```
+
+---
 
 ## Bases de datos
