@@ -30,7 +30,7 @@ const-soft-practica-05
 │       └── mysql_autores_model.py
 │       └── mysql_generos_model.py
 │       └── mysql_libros_model.py
-└── mysql
+├── mysql
 │   └── biblioteca-datos.sql
 │   └── biblioteca-diagrama.mwb
 │   └── biblioteca-modelo-fisico.PNG
