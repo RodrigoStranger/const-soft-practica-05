@@ -8,7 +8,7 @@ CREATE TABLE users (
     contraseña VARCHAR(255) NOT NULL
 );
 
-INSERT INTO user (nombre, contraseña) VALUES ('rodrigo', 'admin');
-INSERT INTO user (nombre, contraseña) VALUES ('angela', 'admin');
-INSERT INTO user (nombre, contraseña) VALUES ('daniel', 'admin');
-INSERT INTO user (nombre, contraseña) VALUES ('esthephany', 'admin');
+INSERT INTO users (nombre, contraseña) VALUES ('rodrigo', 'admin');
+INSERT INTO users (nombre, contraseña) VALUES ('angela', 'admin');
+INSERT INTO users (nombre, contraseña) VALUES ('daniel', 'admin');
+INSERT INTO users (nombre, contraseña) VALUES ('esthephany', 'admin');
