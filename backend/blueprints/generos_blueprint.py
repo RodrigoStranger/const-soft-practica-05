@@ -1,11 +1,14 @@
 from flask import Blueprint, request, jsonify
 from backend.models.mysql_generos_model import GenerosModel
+from backend.blueprints.server_blueprint import verify_token
 
 generos_blueprint = Blueprint('generos_blueprint', __name__)
 generos_model = GenerosModel()
 
 @generos_blueprint.route('/creargenero', methods=['POST'])
 def crear_genero():
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
     try:
         data = request.get_json()
         nombre = data['nombre']
@@ -18,6 +21,8 @@ def crear_genero():
 
 @generos_blueprint.route('/obtenergenero/<int:id_genero>', methods=['GET'])
 def obtener_genero(id_genero):
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
     try:
         genero = generos_model.obtener_genero_por_id(id_genero)
         if not genero:
@@ -28,6 +33,8 @@ def obtener_genero(id_genero):
 
 @generos_blueprint.route('/obtenergeneros', methods=['GET'])
 def obtener_generos():
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
     try:
         generos = generos_model.obtener_generos()
         return jsonify(generos), 200
@@ -36,6 +43,8 @@ def obtener_generos():
 
 @generos_blueprint.route('/actualizargenero/<int:id_genero>', methods=['PUT'])
 def actualizar_genero(id_genero):
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
     try:
         data = request.get_json()
         nombre = data['nombre']
@@ -48,6 +57,8 @@ def actualizar_genero(id_genero):
 '''
 @generos_blueprint.route('/asignargeneralibro/genero/<int:id_genero>/libro/<int:id_libro>', methods=['POST'])
 def asignar_genero_a_libro(id_genero, id_libro):
+    if not verify_token():
+            return jsonify({'error': 'Token inválido'}), 401
     try:
         generos_model.asignar_genero_a_libro(id_genero, id_libro)
         return jsonify({'mensaje': 'Género asignado al libro exitosamente'}), 201
@@ -57,6 +68,8 @@ def asignar_genero_a_libro(id_genero, id_libro):
 
 @generos_blueprint.route('/asignargeneralibro', methods=['POST'])
 def asignar_genero_a_libro():
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
     try:
         data = request.get_json()
         id_genero = data['id_genero']
