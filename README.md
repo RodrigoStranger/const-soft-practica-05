@@ -30,7 +30,9 @@ const-soft-practica-05
 ├── README.md
 └── requirements.txt
 ```
+
+
 ## Instalar dependencias
-```sh
+```bash
 pip install -r requirements.txt
 ```
