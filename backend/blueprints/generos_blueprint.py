@@ -41,16 +41,29 @@ def obtener_generos():
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
-@generos_blueprint.route('/actualizargenero/genero/<int:id_genero>', methods=['PUT'])
-def actualizar_genero(id_genero):
+@generos_blueprint.route('/actualizargenero/nombre/<int:id_genero>', methods=['PUT'])
+def actualizar_nombre_genero(id_genero):
     if not verify_token():
         return jsonify({'error': 'Token inválido'}), 401
     try:
         data = request.get_json()
         nombre = data['nombre']
+        
+        generos_model.actualizar_nombre_genero(id_genero, nombre)
+        return jsonify({'mensaje': 'Nombre del género actualizado exitosamente'}), 200
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400
+
+@generos_blueprint.route('/actualizargenero/descripcion/<int:id_genero>', methods=['PUT'])
+def actualizar_descripcion_genero(id_genero):
+    if not verify_token():
+        return jsonify({'error': 'Token inválido'}), 401
+    try:
+        data = request.get_json()
         descripcion = data['descripcion']
-        generos_model.actualizar_genero(id_genero, nombre, descripcion)
-        return jsonify({'mensaje': 'Género actualizado exitosamente'}), 200
+        
+        generos_model.actualizar_descripcion_genero(id_genero, descripcion)
+        return jsonify({'mensaje': 'Descripción del género actualizada exitosamente'}), 200
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
