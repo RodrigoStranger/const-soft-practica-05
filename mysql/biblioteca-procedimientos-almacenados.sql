@@ -338,9 +338,9 @@ BEGIN
         SET genero_ya_asignado = TRUE;
     END IF;
     IF genero_no_existe AND libro_no_existe THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género y el libro no existe en la base de datos.';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género y el libro no existen en la base de datos.';
     ELSEIF genero_no_existe THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género no existe en la base de datos.';c
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género no existe en la base de datos.';
     ELSEIF libro_no_existe THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
     ELSEIF genero_ya_asignado THEN
