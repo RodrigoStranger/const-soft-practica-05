@@ -213,20 +213,31 @@ CREATE PROCEDURE AsignarAutorALibro (
     IN p_id_libro INT
 )
 BEGIN
+    DECLARE autor_no_existe BOOL DEFAULT FALSE;
+    DECLARE libro_no_existe BOOL DEFAULT FALSE;
+    DECLARE autor_ya_asignado BOOL DEFAULT FALSE;
     IF NOT EXISTS (SELECT 1 FROM Autores WHERE id_autor = p_id_autor) THEN
+        SET autor_no_existe = TRUE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
+        SET libro_no_existe = TRUE;
+    END IF;
+    IF EXISTS (SELECT 1 FROM Libros_Autores WHERE id_autor = p_id_autor AND id_libro = p_id_libro) THEN
+        SET autor_ya_asignado = TRUE;
+    END IF;
+    IF autor_no_existe AND libro_no_existe THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos y el libro no existe en la base de datos.';
+    ELSEIF autor_no_existe THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
-    ELSEIF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
+    ELSEIF libro_no_existe THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
-    ELSEIF EXISTS (
-        SELECT 1 FROM Libros_Autores 
-        WHERE id_autor = p_id_autor AND id_libro = p_id_libro
-    ) THEN
+    ELSEIF autor_ya_asignado THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor ya está asignado a este libro.';
     ELSE
         INSERT INTO Libros_Autores (id_libro, id_autor)
         VALUES (p_id_libro, p_id_autor);
     END IF;
-END $$
+END $$ 
 DELIMITER ;
 
 -- POST
@@ -314,20 +325,31 @@ CREATE PROCEDURE AsignarGeneroALibro (
     IN p_id_libro INT
 )
 BEGIN
+    DECLARE genero_no_existe BOOL DEFAULT FALSE;
+    DECLARE libro_no_existe BOOL DEFAULT FALSE;
+    DECLARE genero_ya_asignado BOOL DEFAULT FALSE;
     IF NOT EXISTS (SELECT 1 FROM Generos WHERE id_genero = p_id_genero) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género no existe en la base de datos.';
-    ELSEIF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
+        SET genero_no_existe = TRUE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
+        SET libro_no_existe = TRUE;
+    END IF;
+    IF EXISTS (SELECT 1 FROM Libros_Generos WHERE id_genero = p_id_genero AND id_libro = p_id_libro) THEN
+        SET genero_ya_asignado = TRUE;
+    END IF;
+    IF genero_no_existe AND libro_no_existe THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género y el libro no existe en la base de datos.';
+    ELSEIF genero_no_existe THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género no existe en la base de datos.';c
+    ELSEIF libro_no_existe THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
-    ELSEIF EXISTS (
-        SELECT 1 FROM Libros_Generos 
-        WHERE id_genero = p_id_genero AND id_libro = p_id_libro
-    ) THEN
+    ELSEIF genero_ya_asignado THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género ya está asignado a este libro.';
     ELSE
         INSERT INTO Libros_Generos (id_libro, id_genero)
         VALUES (p_id_libro, p_id_genero);
     END IF;
-END $$
+END $$ 
 DELIMITER ;
 
 -- TAREA: 
@@ -336,10 +358,19 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE ObtenerLibrosPorAutor (IN p_id_autor INT)
 BEGIN
+    DECLARE autor_no_existe BOOL DEFAULT FALSE;
+    DECLARE autor_sin_libros BOOL DEFAULT FALSE;
     IF NOT EXISTS (SELECT 1 FROM Autores WHERE id_autor = p_id_autor) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
+        SET autor_no_existe = TRUE;
     END IF;
     IF NOT EXISTS (SELECT 1 FROM Libros_Autores WHERE id_autor = p_id_autor) THEN
+        SET autor_sin_libros = TRUE;
+    END IF;
+    IF autor_no_existe AND autor_sin_libros THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos y no tiene libros asociados.';
+    ELSEIF autor_no_existe THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
+    ELSEIF autor_sin_libros THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no tiene libros asociados.';
     END IF;
     SELECT 
@@ -353,7 +384,7 @@ BEGIN
         Libros_Autores LA ON L.id_libro = LA.id_libro
     WHERE 
         LA.id_autor = p_id_autor;
-END $$
+END $$ 
 DELIMITER ;
 
 -- LISTAR LOS AUTORES DE UN LIBRO
@@ -361,10 +392,19 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE ObtenerAutoresPorLibro (IN p_id_libro INT)
 BEGIN
+    DECLARE libro_no_existe BOOL DEFAULT FALSE;
+    DECLARE libro_sin_autores BOOL DEFAULT FALSE;
     IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
+        SET libro_no_existe = TRUE;
     END IF;
     IF NOT EXISTS (SELECT 1 FROM Libros_Autores WHERE id_libro = p_id_libro) THEN
+        SET libro_sin_autores = TRUE;
+    END IF;
+    IF libro_no_existe AND libro_sin_autores THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos y no tiene autores asociados.';
+    ELSEIF libro_no_existe THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
+    ELSEIF libro_sin_autores THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no tiene autores asociados.';
     END IF;
     SELECT 
@@ -378,5 +418,5 @@ BEGIN
         Libros_Autores LA ON A.id_autor = LA.id_autor
     WHERE 
         LA.id_libro = p_id_libro;
-END $$
+END $$ 
 DELIMITER ;
