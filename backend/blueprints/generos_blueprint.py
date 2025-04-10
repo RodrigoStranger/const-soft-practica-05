@@ -13,9 +13,8 @@ def crear_genero():
         data = request.get_json()
         nombre = data['nombre']
         descripcion = data['descripcion']
-        
         generos_model.crear_genero(nombre, descripcion)
-        return jsonify({'mensaje': 'Género creado exitosamente'}), 201
+        return jsonify({'mensaje': f'Género {nombre} creado exitosamente'}), 201
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
@@ -47,9 +46,9 @@ def actualizar_nombre_genero(id_genero):
         return jsonify({'error': 'Token inválido'}), 401
     try:
         data = request.get_json()
-        nombre = data['nombre']
-        generos_model.actualizar_nombre_genero(id_genero, nombre)
-        return jsonify({'mensaje': 'Nombre del género actualizado exitosamente'}), 200
+        nuevo_nombre = data['nombre']
+        generos_model.actualizar_nombre_genero(id_genero, nuevo_nombre)
+        return jsonify({'mensaje': f'Nombre del género actualizado exitosamente a {nuevo_nombre}'}), 200
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 

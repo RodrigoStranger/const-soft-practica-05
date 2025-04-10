@@ -14,9 +14,8 @@ def crear_autor():
         nombre = data['nombre']
         fecha_nacimiento = data['fecha_nacimiento']
         nacionalidad = data['nacionalidad']
-        
         autores_model.crear_autor(nombre, fecha_nacimiento, nacionalidad)
-        return jsonify({'mensaje': 'Autor creado exitosamente'}), 201
+        return jsonify({'mensaje': f'Autor {nombre} creado exitosamente'}), 201
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
@@ -48,9 +47,9 @@ def actualizar_nombre_autor(id_autor):
         return jsonify({'error': 'Token inválido'}), 401
     try:
         data = request.get_json()
-        nombre = data['nombre']
-        autores_model.actualizar_nombre_autor(id_autor, nombre)
-        return jsonify({'mensaje': 'Nombre del autor actualizado exitosamente'}), 200
+        nuevo_nombre = data['nombre']
+        autores_model.actualizar_nombre_autor(id_autor, nuevo_nombre)
+        return jsonify({'mensaje': f'Nombre del autor actualizado exitosamente a {nuevo_nombre}'}), 200
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
         
