@@ -15,7 +15,7 @@ def crear_libro():
         fecha_publicacion = data['fecha_publicacion']
         descripcion = data['descripcion']
         libros_model.crear_libro(titulo, fecha_publicacion, descripcion)
-        return jsonify({'mensaje': f'Libro {titulo} fue creado exitosamente'}), 201
+        return jsonify({'mensaje': f'Libro {titulo} creado exitosamente'}), 201
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
 
