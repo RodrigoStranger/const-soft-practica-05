@@ -226,7 +226,7 @@ BEGIN
         SET autor_ya_asignado = TRUE;
     END IF;
     IF autor_no_existe AND libro_no_existe THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos y el libro no existe en la base de datos.';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor y el libro no existe en la base de datos.';
     ELSEIF autor_no_existe THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
     ELSEIF libro_no_existe THEN
