@@ -358,19 +358,10 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE ObtenerLibrosPorAutor (IN p_id_autor INT)
 BEGIN
-    DECLARE autor_no_existe BOOL DEFAULT FALSE;
-    DECLARE autor_sin_libros BOOL DEFAULT FALSE;
     IF NOT EXISTS (SELECT 1 FROM Autores WHERE id_autor = p_id_autor) THEN
-        SET autor_no_existe = TRUE;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
     END IF;
     IF NOT EXISTS (SELECT 1 FROM Libros_Autores WHERE id_autor = p_id_autor) THEN
-        SET autor_sin_libros = TRUE;
-    END IF;
-    IF autor_no_existe AND autor_sin_libros THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos y no tiene libros asociados.';
-    ELSEIF autor_no_existe THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
-    ELSEIF autor_sin_libros THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no tiene libros asociados.';
     END IF;
     SELECT 
@@ -392,19 +383,10 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE ObtenerAutoresPorLibro (IN p_id_libro INT)
 BEGIN
-    DECLARE libro_no_existe BOOL DEFAULT FALSE;
-    DECLARE libro_sin_autores BOOL DEFAULT FALSE;
     IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
-        SET libro_no_existe = TRUE;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
     END IF;
     IF NOT EXISTS (SELECT 1 FROM Libros_Autores WHERE id_libro = p_id_libro) THEN
-        SET libro_sin_autores = TRUE;
-    END IF;
-    IF libro_no_existe AND libro_sin_autores THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos y no tiene autores asociados.';
-    ELSEIF libro_no_existe THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
-    ELSEIF libro_sin_autores THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no tiene autores asociados.';
     END IF;
     SELECT 
