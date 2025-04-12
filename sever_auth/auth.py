@@ -5,9 +5,10 @@ from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+load_dotenv('keys.env')
 
 app = Flask(__name__)
+
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 dbconfig = {
@@ -46,10 +47,8 @@ def generate_token():
             cursor.close()
             conn.close()
             return jsonify({'error': 'Credenciales inválidas'}), 401
-
     except mysql.connector.Error as err:
         return jsonify({'error': f'Error en la base de datos: {err}'}), 500
-    
     finally:
         if cursor:
             cursor.close()

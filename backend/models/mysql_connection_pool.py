@@ -1,16 +1,19 @@
 import time
 import mysql.connector.pooling
 import os
-
 import configparser
+from dotenv import load_dotenv
+
 config = configparser.ConfigParser()
 
+load_dotenv('keys.env')
+
 dbconfig = {
-    "host": os.environ["MYSQL_HOST"],
-    "port": os.environ["MYSQL_PORT"],
-    "user":os.environ["MYSQL_USER"],
-    "password":os.environ["MYSQL_PASSWORD"],
-    "database":os.environ["MYSQL_DATABASE"],
+    "host": os.getenv("MYSQL_HOST"),
+    "port": int(os.getenv("MYSQL_PORT")),
+    "user": os.getenv("MYSQL_USER"),
+    "password": os.getenv("MYSQL_PASSWORD"),
+    "database": os.getenv("MYSQL_DATABASE"),
 }
 
 class MySQLPool(object):

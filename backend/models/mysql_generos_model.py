@@ -93,3 +93,19 @@ class GenerosModel:
             if conn:
                 conn.close()
             raise e
+    
+    def listar_libros_por_genero(self, id_genero):
+        try:
+            conn = self.mysql_pool.pool.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.callproc('ObtenerLibrosPorGenero', (id_genero,))
+            libros = []
+            for result in cursor.stored_results():
+                libros = result.fetchall()
+            cursor.close()
+            conn.close()
+            return libros
+        except Exception as e:
+            if conn:
+                conn.close()
+            raise e

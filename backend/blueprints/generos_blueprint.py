@@ -76,3 +76,15 @@ def asignar_genero_a_libro():
         return jsonify({'mensaje': 'Género asignado al libro exitosamente'}), 201
     except Exception as e:
         return jsonify({'mensaje': str(e)}), 400
+    
+@generos_blueprint.route('/obtenerlibrosporgenero/<int:id_genero>', methods=['GET'])
+def listar_libros_por_genero(id_genero):
+    if not verify_token():
+        return jsonify({'error': 'Acceso no autorizado'}), 401
+    try:
+        genero = generos_model.listar_libros_por_genero(id_genero)
+        if not genero:
+            return jsonify({'mensaje': 'Género no encontrado'}), 404
+        return jsonify(genero), 200
+    except Exception as e:
+        return jsonify({'mensaje': str(e)}), 400

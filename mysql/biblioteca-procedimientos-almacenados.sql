@@ -52,6 +52,7 @@ BEGIN
     SELECT 
         L.id_libro,
         L.titulo AS titulo_libro,
+        L.disponible,
         L.descripcion,
         GROUP_CONCAT(DISTINCT A.nombre SEPARATOR ', ') AS autores,
         GROUP_CONCAT(DISTINCT G.nombre SEPARATOR ', ') AS generos
@@ -410,4 +411,17 @@ BEGIN
         LA.id_libro = p_id_libro
         AND L.disponible = 1;
 END $$
+DELIMITER ;
+
+--GET
+-- OBTENER LIBROS POR GENERO
+DELIMITER $$
+CREATE PROCEDURE ObtenerLibrosPorGenero(IN p_id_genero INT)
+BEGIN
+    SELECT L.id_libro, L.titulo, L.fecha_publicacion, L.descripcion, L.disponible
+    FROM Libros AS L
+    JOIN Libros_Generos AS LG ON L.id_libro = LG.id_libro
+    JOIN Generos AS G ON LG.id_genero = G.id_genero
+    WHERE G.id_genero = p_id_genero AND L.disponible = 1;
+END$$
 DELIMITER ;
