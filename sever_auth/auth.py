@@ -32,7 +32,7 @@ def generate_token():
             if user[2] == data.get('contraseña'):
                 payload = {
                     'user': user[1],
-                    'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+                    'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=5)
                 }
                 token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
                 cursor.close()
