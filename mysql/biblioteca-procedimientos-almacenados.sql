@@ -26,9 +26,12 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
     END IF;
-
+    IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro AND disponible = 1) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no está disponible.';
+    END IF;
     SELECT 
         L.titulo AS titulo_libro,
+        L.disponible AS activo,
         L.descripcion,
         GROUP_CONCAT(DISTINCT A.nombre SEPARATOR ', ') AS autores,
         GROUP_CONCAT(DISTINCT G.nombre SEPARATOR ', ') AS generos
@@ -57,8 +60,9 @@ BEGIN
     LEFT JOIN Autores A ON LA.id_autor = A.id_autor
     LEFT JOIN Libros_Generos LG ON L.id_libro = LG.id_libro
     LEFT JOIN Generos G ON LG.id_genero = G.id_genero
+    WHERE L.disponible = 1
     GROUP BY L.id_libro
-    ORDER BY L.titulo ASC;
+    ORDER BY L.id_libro ASC;
 END $$
 DELIMITER ;
 
@@ -368,15 +372,17 @@ BEGIN
         L.id_libro, 
         L.titulo, 
         L.fecha_publicacion, 
-        L.descripcion 
+        L.descripcion
     FROM 
         Libros L
     JOIN 
         Libros_Autores LA ON L.id_libro = LA.id_libro
     WHERE 
-        LA.id_autor = p_id_autor;
-END $$ 
+        LA.id_autor = p_id_autor
+        AND L.disponible = 1;
+END $$
 DELIMITER ;
+
 
 -- LISTAR LOS AUTORES DE UN LIBRO
 -- GET
@@ -392,13 +398,16 @@ BEGIN
     SELECT 
         A.id_autor, 
         A.nombre, 
-        A.fecha_nacimiento, 
+        A.fecha_nacimiento,
         A.nacionalidad 
     FROM 
         Autores A
-    JOIN 
+    JOIN
         Libros_Autores LA ON A.id_autor = LA.id_autor
+    JOIN 
+        Libros L ON L.id_libro = LA.id_libro
     WHERE 
-        LA.id_libro = p_id_libro;
-END $$ 
+        LA.id_libro = p_id_libro
+        AND L.disponible = 1;
+END $$
 DELIMITER ;
