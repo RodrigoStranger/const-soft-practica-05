@@ -24,7 +24,6 @@ const-soft-practica-05
 │   │   └── autores_blueprint.py
 │   │   └── generos_blueprint.py
 │   │   └── libros_blueprint.py
-│   │   └── server_blueprint.py
 │   └── models
 │       └── mysql_connection_pool.py
 │       └── mysql_autores_model.py
@@ -38,6 +37,9 @@ const-soft-practica-05
 │   └── biblioteca.sql
 │   └── usuariosbiblioteca-modelo-fisico.PNG
 │   └── usuariosbiblioteca.sql
+├── server_auth
+│   └── auth.py
+│   └── authentication.py
 ├── .gitignore
 ├── app.py
 ├── README.md
