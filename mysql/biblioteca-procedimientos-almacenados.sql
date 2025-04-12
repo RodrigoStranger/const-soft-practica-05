@@ -72,15 +72,11 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM Libros WHERE id_libro = p_id_libro) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El libro no existe en la base de datos.';
     END IF;
-    IF EXISTS (SELECT 1 FROM Libros WHERE titulo = p_nuevo_titulo AND id_libro != p_id_libro) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Ya existe un libro con el mismo título.';
-    END IF;
     UPDATE Libros
     SET titulo = p_nuevo_titulo
     WHERE id_libro = p_id_libro;
-END $$
+END $$ 
 DELIMITER ;
-
 
 -- PUT 
 DELIMITER $$ 
@@ -186,13 +182,9 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM Autores WHERE id_autor = p_id_autor) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El autor no existe en la base de datos.';
     END IF;
-    IF EXISTS (SELECT 1 FROM Autores WHERE nombre = p_nombre AND id_autor != p_id_autor) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Ya existe un autor con el mismo nombre.';
-    END IF;
     UPDATE Autores
     SET nombre = p_nombre
     WHERE id_autor = p_id_autor;
-
 END $$ 
 DELIMITER ;
 
@@ -302,13 +294,11 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM Generos WHERE id_genero = p_id_genero) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El género no existe en la base de datos.';
     END IF;
-    IF EXISTS (SELECT 1 FROM Generos WHERE nombre = p_nombre AND id_genero != p_id_genero) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Ya existe un género con el mismo nombre.';
-    END IF;
+
     UPDATE Generos
     SET nombre = p_nombre
     WHERE id_genero = p_id_genero;
-END $$
+END $$ 
 DELIMITER ;
 
 -- PUT
