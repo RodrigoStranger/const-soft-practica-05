@@ -42,6 +42,7 @@ const-soft-practica-05
 │   └── authentication.py
 ├── .gitignore
 ├── app.py
+├── keys.env
 ├── README.md
 └── requirements.txt
 ```
